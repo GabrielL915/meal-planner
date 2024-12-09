@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "s/lib/utils"
+import { cn } from "@mlplanner/app/@shadcn/lib/utils"
 
 const Card = React.forwardRef<
   HTMLDivElement,
