@@ -1,9 +1,9 @@
 import React from 'react';
 import { Plus, X } from 'lucide-react';
-import { Button } from '@mlplanner/app/components/ui/button';
-import { Input } from '@mlplanner/app/components/ui/input';
-import { Label } from '@mlplanner/app/components/ui/label';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/components/ui/select';
+import { Button } from '@mlplanner/app/_components/ui/button';
+import { Input } from '@mlplanner/app/_components/ui/input';
+import { Label } from '@mlplanner/app/_components/ui/label';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/_components/ui/select';
 import { Trash2 } from 'lucide-react';
 import { Ingredient } from '@mlplanner/app/util/interfaces';
 

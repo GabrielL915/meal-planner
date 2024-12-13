@@ -1,9 +1,9 @@
 import { Plus } from 'lucide-react';
-import { Button } from '@mlplanner/app/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@mlplanner/app/components/ui/card';
-import { Dialog, DialogTrigger, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@mlplanner/app/components/ui/dialog';
-import { Input } from '@mlplanner/app/components/ui/input';
-import { Label } from '@mlplanner/app/components/ui/label';
+import { Button } from '@mlplanner/app/_components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@mlplanner/app/_components/ui/card';
+import { Dialog, DialogTrigger, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@mlplanner/app/_components/ui/dialog';
+import { Input } from '@mlplanner/app/_components/ui/input';
+import { Label } from '@mlplanner/app/_components/ui/label';
 import { Trash2, Edit2 } from 'lucide-react';
 import { Ingredient, MealItem } from '@mlplanner/app/util/interfaces';
 
