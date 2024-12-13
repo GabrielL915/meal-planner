@@ -1,26 +1,29 @@
-import { useState } from 'react';
+import React from 'react';
 import { Plus, X } from 'lucide-react';
-import { Button } from '@mlplanner/app/@shadcn/components/ui/button';
-import { Input } from '@mlplanner/app/@shadcn/components/ui/input';
-import { Label } from '@mlplanner/app/@shadcn/components/ui/label';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/@shadcn/components/ui/select';
+import { Button } from '@mlplanner/app/components/ui/button';
+import { Input } from '@mlplanner/app/components/ui/input';
+import { Label } from '@mlplanner/app/components/ui/label';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/components/ui/select';
 import { Trash2 } from 'lucide-react';
+import { Ingredient } from '@mlplanner/app/util/interfaces';
 
-interface Ingredient {
-    id: string
-    name: string
-    quantity: string
+interface MealFormProps {
+    dishName: string;
+    setDishName: (value: string) => void;
+    ingredients: Ingredient[];
+    updateIngredient: (id: string, field: 'name' | 'quantity', value: string) => void;
+    removeIngredient: (id: string) => void;
+    addIngredient: () => void;
+    selectedMeal: 'lunch' | 'dinner';
+    setSelectedMeal: (value: 'lunch' | 'dinner') => void;
+    selectedDay: string;
+    setSelectedDay: (value: string) => void;
+    daysOfWeek: string[];
+    editingItem: any;
+    saveEdit: () => void;
+    addItem: () => void;
+    cancelEdit: () => void;
 }
-
-interface MealItem {
-    id: string
-    dishName: string
-    ingredients: Ingredient[]
-    meal: 'lunch' | 'dinner'
-    day: string
-  }
-
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 export default function MealForm({
     dishName,
@@ -38,7 +41,7 @@ export default function MealForm({
     saveEdit,
     addItem,
     cancelEdit,
-}) {
+}: MealFormProps) {
     return (
         <div className="flex flex-col space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
