@@ -10,6 +10,7 @@ import { Input } from '@mlplanner/app/@shadcn/components/ui/input';
 import { Label } from '@mlplanner/app/@shadcn/components/ui/label';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/@shadcn/components/ui/select';
 import { Trash2, Edit2 } from 'lucide-react';
+import MealForm from './form/meal-form';
 
 interface Ingredient {
   id: string
@@ -40,7 +41,7 @@ export default function WeeklyMealPlanner() {
   }
 
   const updateIngredient = (id: string, field: 'name' | 'quantity', value: string) => {
-    setIngredients(ingredients.map(ing => 
+    setIngredients(ingredients.map(ing =>
       ing.id === id ? { ...ing, [field]: value } : ing
     ))
   }
@@ -80,15 +81,15 @@ export default function WeeklyMealPlanner() {
 
   const saveEdit = () => {
     if (editingItem && dishName.trim() && ingredients.some(ing => ing.name.trim() && ing.quantity.trim())) {
-      setItems(items.map(item => 
-        item.id === editingItem.id 
+      setItems(items.map(item =>
+        item.id === editingItem.id
           ? {
-              ...item,
-              dishName: dishName,
-              ingredients: ingredients.filter(ing => ing.name.trim() && ing.quantity.trim()),
-              meal: selectedMeal,
-              day: selectedDay,
-            }
+            ...item,
+            dishName: dishName,
+            ingredients: ingredients.filter(ing => ing.name.trim() && ing.quantity.trim()),
+            meal: selectedMeal,
+            day: selectedDay,
+          }
           : item
       ))
       setEditingItem(null)
@@ -110,83 +111,26 @@ export default function WeeklyMealPlanner() {
           <CardTitle className="text-2xl font-bold text-center">Weekly Meal Planner</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex flex-col space-y-4">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="grid gap-2">
-                <Label htmlFor="dishName">Dish Name</Label>
-                <Input
-                  id="dishName"
-                  placeholder="Enter dish name..."
-                  value={dishName}
-                  onChange={(e) => setDishName(e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <Label>Ingredients</Label>
-                {ingredients.map((ing, index) => (
-                  <div key={ing.id} className="flex gap-2">
-                    <Input
-                      placeholder="Ingredient name"
-                      value={ing.name}
-                      onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)}
-                    />
-                    <Input
-                      placeholder="Quantity"
-                      value={ing.quantity}
-                      onChange={(e) => updateIngredient(ing.id, 'quantity', e.target.value)}
-                    />
-                    {index > 0 && (
-                      <Button variant="ghost" size="icon" onClick={() => removeIngredient(ing.id)}>
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-                ))}
-                <Button variant="outline" onClick={addIngredient}>
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Ingredient
-                </Button>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="meal">Meal</Label>
-                <Select value={selectedMeal} onValueChange={(value: 'lunch' | 'dinner') => setSelectedMeal(value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select meal" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="lunch">Lunch</SelectItem>
-                    <SelectItem value="dinner">Dinner</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="day">Day</Label>
-                <Select value={selectedDay} onValueChange={setSelectedDay}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select day" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {daysOfWeek.map((day) => (
-                      <SelectItem key={day} value={day}>
-                        {day}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <Button onClick={editingItem ? saveEdit : addItem} className="w-full">
-              <Plus className="mr-2 h-4 w-4" />
-              {editingItem ? 'Save Changes' : 'Add Meal'}
-            </Button>
-            {editingItem && (
-              <Button onClick={cancelEdit} variant="outline" className="w-full">
-                <X className="mr-2 h-4 w-4" />
-                Cancel Edit
-              </Button>
-            )}
-          </div>
-
+          {/* FORM */}
+          <MealForm
+            dishName={dishName}
+            setDishName={setDishName}
+            ingredients={ingredients}
+            updateIngredient={updateIngredient}
+            removeIngredient={removeIngredient}
+            addIngredient={addIngredient}
+            selectedMeal={selectedMeal}
+            setSelectedMeal={setSelectedMeal}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay}
+            daysOfWeek={daysOfWeek}
+            editingItem={editingItem}
+            saveEdit={saveEdit}
+            addItem={addItem}
+            cancelEdit={cancelEdit}
+          />
+          {/* END FORM */}
+          {/* DAY OF WEEK and MEAL */}
           <Tabs defaultValue="Monday" className="w-full">
             <TabsList className="grid w-full grid-cols-7">
               {daysOfWeek.map((day) => (
@@ -195,6 +139,8 @@ export default function WeeklyMealPlanner() {
                 </TabsTrigger>
               ))}
             </TabsList>
+            {/* END DAYS OF WEEK AND MEALS */}
+            {/* START OF LUNCH DIALOOG */}
             {daysOfWeek.map((day) => (
               <TabsContent key={day} value={day} className="space-y-4">
                 <div className="space-y-4">
@@ -216,6 +162,7 @@ export default function WeeklyMealPlanner() {
                               ))}
                             </ul>
                           </CardContent>
+                          {/*EDIT FORM */}
                           <CardFooter className="flex justify-end space-x-2">
                             <Dialog>
                               <DialogTrigger asChild>
@@ -268,14 +215,19 @@ export default function WeeklyMealPlanner() {
                                 </DialogFooter>
                               </DialogContent>
                             </Dialog>
+                            {/* END OF EDIT*/}
+                            {/* DELETE BUTTOM */}
                             <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
                               <Trash2 className="h-4 w-4" />
                             </Button>
+                            {/* END OF DELETE BUTTON */}
                           </CardFooter>
                         </Card>
                       ))}
                   </div>
                 </div>
+                {/* END OF LUNCH */}
+                {/* START OF DINNER */}
                 <div className="space-y-4">
                   <h3 className="font-semibold">Dinner</h3>
                   <div className="space-y-2">
@@ -359,6 +311,7 @@ export default function WeeklyMealPlanner() {
             ))}
           </Tabs>
         </CardContent>
+        {/* TOTAL MEALS */}
         <CardFooter className="flex justify-between">
           <div className="text-sm text-muted-foreground">
             Total Meals: {items.length}
