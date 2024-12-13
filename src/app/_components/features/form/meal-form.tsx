@@ -5,7 +5,7 @@ import { Input } from '@mlplanner/app/_components/ui/input';
 import { Label } from '@mlplanner/app/_components/ui/label';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@mlplanner/app/_components/ui/select';
 import { Trash2 } from 'lucide-react';
-import { Ingredient } from '@mlplanner/app/util/interfaces';
+import type { Ingredient } from '@mlplanner/app/util/interfaces';
 
 interface MealFormProps {
     dishName: string;

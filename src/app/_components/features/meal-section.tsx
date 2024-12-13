@@ -5,7 +5,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogFooter, DialogHeader, Dialo
 import { Input } from '@mlplanner/app/_components/ui/input';
 import { Label } from '@mlplanner/app/_components/ui/label';
 import { Trash2, Edit2 } from 'lucide-react';
-import { Ingredient, MealItem } from '@mlplanner/app/util/interfaces';
+import type { Ingredient, MealItem } from '@mlplanner/app/util/interfaces';
 
 interface MealSectionProps {
     mealType: 'lunch' | 'dinner';

@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@mlplanner
 import { Tabs, TabsTrigger, TabsContent, TabsList } from '@mlplanner/app/_components/ui/tabs';
 import MealForm from '@mlplanner/app/_components/features/form/meal-form';
 import MealSection from '@mlplanner/app/_components/features/meal-section';
-import { Ingredient, MealItem } from '@mlplanner/app/util/interfaces';
+import type { Ingredient, MealItem } from '@mlplanner/app/util/interfaces';
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
