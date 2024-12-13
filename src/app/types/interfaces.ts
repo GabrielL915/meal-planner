@@ -11,3 +11,4 @@ export interface MealItem {
     meal: 'lunch' | 'dinner';
     day: string;
 }
+  

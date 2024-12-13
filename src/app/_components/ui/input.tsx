@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@mlplanner/app/util/lib/utils"
+import { cn } from "@mlplanner/app/lib/utils"
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, ...props }, ref) => {
