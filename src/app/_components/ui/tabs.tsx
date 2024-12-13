@@ -3,7 +3,7 @@
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 
-import { cn } from "@mlplanner/app/util/lib/utils"
+import { cn } from "@mlplanner/app/lib/utils"
 
 const Tabs = TabsPrimitive.Root
 
