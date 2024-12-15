@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Ingredient, MealItem } from '@mlplanner/app/types/interfaces';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function useWeeklyMealPlanner() {
   const [items, setItems] = useState<MealItem[]>([]);
@@ -9,8 +10,19 @@ export default function useWeeklyMealPlanner() {
   const [selectedDay, setSelectedDay] = useState('Monday');
   const [editingItem, setEditingItem] = useState<MealItem | null>(null);
 
+  useEffect(() => {
+    const storedItems = localStorage.getItem('weeklyMealPlanner');
+    if (storedItems) {
+      setItems(JSON.parse(storedItems) as MealItem[]);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('weeklyMealPlanner', JSON.stringify(items));
+  }, [items]);
+
   const addIngredient = () => {
-    setIngredients([...ingredients, { id: Date.now().toString(), name: '', quantity: '' }]);
+    setIngredients([...ingredients, { id: uuidv4(), name: '', quantity: '' }]);
   };
 
   const updateIngredient = (id: string, field: 'name' | 'quantity', value: string) => {
@@ -28,7 +40,7 @@ export default function useWeeklyMealPlanner() {
       setItems([
         ...items,
         {
-          id: Math.random().toString(36).substr(2, 9),
+          id: uuidv4(),
           dishName,
           ingredients: ingredients.filter(ing => ing.name.trim() && ing.quantity.trim()),
           meal: selectedMeal,
