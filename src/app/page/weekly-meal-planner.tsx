@@ -9,6 +9,12 @@ import useWeeklyMealPlanner from '@mlplanner/app/hooks/useWeeklyMealPlanner';
 
 const daysOfWeek = Object.values(DaysOfWeek);
 
+const shouldThrowError = true; // Change to `true` to force an error
+
+if (shouldThrowError) {
+  throw new Error("Forced error for testing ErrorBoundary!");
+}
+
 export default function WeeklyMealPlanner() {
   const {
     items,
